@@ -10,6 +10,7 @@ import {
   ListItem,
   ListIcon,
   chakra,
+  Flex,
 } from "@chakra-ui/react";
 import { RiWindow2Fill } from "react-icons/ri";
 
@@ -20,23 +21,19 @@ interface CollapsedFeaturesProps {
 
 const CollapsedFeatures = ({ features }: CollapsedFeaturesProps) => {
   return (
-    <Container
-      as="div"
-      position="relative"
+    <Flex
       width="16em"
       height="4em"
-      display="inline-block"
-      verticalAlign="top"
-      centerContent
+      flexDirection="column"
+      justifyContent="space-between"
+      alignItems="center"
     >
-      <VStack>
-        <CircleIcon width="5%" />
-        <Tooltip label={<CollapsedContent features={features} />}>
-          <CircleIcon width="8%" />
-        </Tooltip>
-        <CircleIcon width="5%" />
-      </VStack>
-    </Container>
+      <CircleIcon width="5%" />
+      <Tooltip label={<CollapsedContent features={features} />}>
+        <CircleIcon width="8%" />
+      </Tooltip>
+      <CircleIcon width="5%" />
+    </Flex>
   );
 };
 
