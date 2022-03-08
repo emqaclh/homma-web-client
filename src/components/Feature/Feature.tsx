@@ -59,10 +59,10 @@ const Feature = ({
       templateRows="repeat(8, 1fr)"
       templateColumns="repeat(2, 1fr)"
       lineHeight="thick"
-      isTruncated
       fontWeight="semibold"
       letterSpacing="wide"
       whileHover={{ scale: 1.045 }}
+      transition={{ ease: "easeOut", duration: 0.328 }}
     >
       <GridItem rowSpan={2} colSpan={1}>
         <Flex flexDirection="row" alignItems="flex-start" marginTop="0.2em">
