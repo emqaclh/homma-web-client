@@ -2,8 +2,13 @@ import React, { FC } from "react";
 import { Button, Grid, GridItem, Select, Text } from "@chakra-ui/react";
 import { CircleIcon } from "../Misc/CircleIcon";
 
+type SessionType = {
+  id: string;
+  name: string;
+};
+
 interface StatusProps {
-  sessions: Array<string>;
+  sessions: Array<SessionType>;
 }
 
 const Status: FC<StatusProps> = (props) => {
@@ -35,7 +40,7 @@ const Status: FC<StatusProps> = (props) => {
       >
         <Select placeholder="Select a session...">
           {sessions.map((session) => (
-            <option value={session}>{session}</option>
+            <option value={session.id}>{session.name}</option>
           ))}
         </Select>
       </GridItem>

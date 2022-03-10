@@ -16,4 +16,4 @@ export default {
 const Template: ComponentStory<typeof Status> = (args) => <Status {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { sessions: ["ejemplo:1"] };
+Default.args = { sessions: [{ id: "1", name: "session" }] };
