@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FC, useState } from "react";
+
 import {
   Center,
-  Container,
+  chakra,
   HStack,
   Icon,
   IconButton,
   Spinner,
   Text,
   useColorModeValue,
+  useBoolean,
 } from "@chakra-ui/react";
 import { RiEditLine, RiAddBoxLine } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -22,7 +24,9 @@ interface HeaderProps {
 
 const MotionCenter = motion(Center);
 
-const Header = ({ tag, color, mode }: HeaderProps) => {
+const Header: FC<HeaderProps> = (props) => {
+  const [isContentVisible, setContentVisible] = useState(false);
+  const { tag, color, mode } = props;
   const backgroundColor: string = useColorModeValue("white", "gray.800");
   const mainText: string =
     mode === "active"
@@ -34,13 +38,7 @@ const Header = ({ tag, color, mode }: HeaderProps) => {
       : "...";
 
   return (
-    <Container
-      position="relative"
-      width="16em"
-      height="4em"
-      display="inline-block"
-      verticalAlign="top"
-    >
+    <chakra.div position="relative" width="16em" height="4em">
       <MotionCenter
         backgroundColor={mode == "active" ? color : backgroundColor}
         borderRadius="lg"
@@ -52,21 +50,27 @@ const Header = ({ tag, color, mode }: HeaderProps) => {
         width="8%"
         height="100%"
         whileHover={{ width: "100%" }}
+        onHoverStart={() => setContentVisible(true)}
+        onHoverEnd={() => setContentVisible(false)}
       >
-        <HStack>
-          {(mode === "active" || mode === "placeholder") && (
-            <IconButton
-              marginTop="0.225em"
-              variant="unstyled"
-              aria-label={mode === "active" ? "Edit dataset" : "Add dataset"}
-              icon={<Icon as={mode === "active" ? RiEditLine : RiAddBoxLine} />}
-            />
-          )}
-          {mode === "loading" && <Spinner />}
-          <Text>{mainText}</Text>
-        </HStack>
+        {isContentVisible && (
+          <HStack>
+            {(mode === "active" || mode === "placeholder") && (
+              <IconButton
+                marginTop="0.225em"
+                variant="unstyled"
+                aria-label={mode === "active" ? "Edit dataset" : "Add dataset"}
+                icon={
+                  <Icon as={mode === "active" ? RiEditLine : RiAddBoxLine} />
+                }
+              />
+            )}
+            {mode === "loading" && <Spinner />}
+            <Text>{mainText}</Text>
+          </HStack>
+        )}
       </MotionCenter>
-    </Container>
+    </chakra.div>
   );
 };
 
